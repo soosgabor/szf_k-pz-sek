@@ -36,6 +36,7 @@ exports.getTrainingById = async (req, res, next) => {
 // @desc Create training
 // @route POST /api/getTrainings
 exports.postTraining = async (req, res, next) => {
+    
     try {
         const training = await Training.create(req.body);
         res.status(201).json({success: true, data: training});
