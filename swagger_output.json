@@ -1,0 +1,338 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SzF képzések API",
+    "description": "A dokumentációt a <b>swagger-autogen</b> modul generálta."
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/trainings/",
+  "tags": [
+    {
+      "name": "Trainings",
+      "description": "Szoftverfejlesztő képzéseket nyílvántartó API"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "store_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://store.swagger.io/oauth/authorize",
+      "flow": "implicit"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/{trainingId}/courses/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "trainingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "trainingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "training": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/{trainingId}/courses/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "trainingId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Training": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5d713995b721c3bb38c1f5d0"
+        },
+        "user": {
+          "type": "string",
+          "example": "5d7a514b5d2c12c7449be045"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jedlik Ányos Gépipari és Informatikai Technikum"
+        },
+        "description": {
+          "type": "string",
+          "example": "Az iskola képzési profilja..."
+        },
+        "website": {
+          "type": "string",
+          "example": "https://jedlik.eu"
+        },
+        "email": {
+          "type": "string",
+          "example": "jedlik@jedlik.eu"
+        },
+        "address": {
+          "type": "string",
+          "example": "7 Szent Istvan Rd Győr 9021"
+        },
+        "careers": {
+          "type": "array",
+          "example": [
+            "Web Development",
+            "UI/UX",
+            "Business"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "housing": {
+          "type": "boolean",
+          "example": true
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
+    }
+  },
+  "components": {
+    "Schemas": [
+      {
+        "name": {
+          "required": [
+            true,
+            "Please add a name"
+          ],
+          "unique": true,
+          "trim": true,
+          "maxlength": [
+            50,
+            "Name can not be more than 50 characters!"
+          ]
+        },
+        "description": {
+          "required": [
+            true,
+            "Please add a description"
+          ],
+          "unique": true,
+          "trim": true,
+          "maxlength": [
+            500,
+            "Description can not be more than 500 characters!"
+          ]
+        },
+        "website": {
+          "match": [
+            {},
+            "Please use a valid URL with HTTP or HTTPS"
+          ]
+        },
+        "email": {
+          "match": [
+            {},
+            "Please add a valid email"
+          ]
+        },
+        "address": {
+          "required": [
+            true,
+            "Please add an address"
+          ]
+        },
+        "location": {
+          "type": {
+            "enum": [
+              "Point"
+            ]
+          },
+          "coordinates": {
+            "type": [
+              null
+            ],
+            "index": "2dsphere"
+          }
+        },
+        "Rating": {
+          "min": [
+            1,
+            "Rating must be at least 1"
+          ],
+          "max": [
+            10,
+            "Rating must can not be more than 10"
+          ]
+        },
+        "photo": {
+          "default": "no-photo.jpg"
+        },
+        "housing": {
+          "default": false
+        },
+        "careers": {
+          "type": [
+            null
+          ],
+          "required": true,
+          "enum": [
+            "Web Development",
+            "Mobile Development",
+            "UI/UX",
+            "Data Science",
+            "Business",
+            "Other"
+          ]
+        },
+        "createdAt": {}
+      }
+    ]
+  }
+}
